@@ -12,13 +12,21 @@ class Bullet(Sprite):
         self.screen = screen
 
         #build a bullet at (0,0)
-        self.rect = pygame.Rect(0, 0, ai_settings.bullet.width, ai_settings.bullet.height)
+        self.rect = pygame.Rect(0, 0, ai_settings.bullet_width, ai_settings.bullet_height)
         self.rect.centerx = ship.rect.centerx
         self.rect.top = ship.rect.top
 
         #float position
         self.y = float(self.rect.y)
 
-        self.color = ai_settings.bullet.color
-        self.speed_factor = ai_settings.bullet.speed_factor
+        self.color = ai_settings.bullet_color
+        self.speed_factor = ai_settings.bullet_speed_factor
 
+    def update(self):
+        self.y -= self.speed_factor
+        self.rect.y = self.y
+
+
+    def draw_bullet(self):
+        '''draw bullet on screen'''
+        pygame.draw.rect(self.screen, self.color, self.rect)
